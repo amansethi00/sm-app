@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, {useState, useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
 import {
   decrement,
   increment,
@@ -7,14 +7,22 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+} from "./counterSlice";
+import {toggleTheme} from "../themes/themeSlice";
+import styles from "./Counter.module.css";
 
 export function Counter() {
   const count = useSelector(selectCount);
+  const posts = useSelector((state) => state.posts.posts);
+  console.log(posts);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
-
+  const [incrementAmount, setIncrementAmount] = useState("2");
+  const curretnTheme = useSelector((state) => state.theme.theme);
+  console.log({curretnTheme});
+  useEffect(() => {
+    dispatch(toggleTheme());
+  }, []);
+  console.log({curretnTheme});
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
