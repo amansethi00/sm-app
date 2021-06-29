@@ -4,13 +4,18 @@ import {Counter} from "./features/counter/Counter";
 import {Header} from "./features/header/Header";
 import "./App.css";
 import {Routes, Route} from "react-router-dom";
-import {PostsList} from "./features/posts/PostsList";
+import {PostsList,SinglePost} from "./features/posts";
+import {themes} from "./features/themes/getTheme";
+import { useTheme } from "@material-ui/core";
+import { useSelector } from "react-redux";
 function App() {
+  const {theme} = useSelector(state=>state.theme);
   return (
-    <div className="App">
+    <div className="App" style={{backgroundColor:themes[theme].secondary,}}>
       <Header />
       <Routes>
         <Route path="/" element={<PostsList />} />
+        <Route path="/posts/:postId" element={<SinglePost />} />
       </Routes>
     </div>
   );

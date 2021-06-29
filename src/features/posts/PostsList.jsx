@@ -14,6 +14,7 @@ import {Link} from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: "100%",
+      backgroundColor:"var(--primary)"
     },
     media: {
       height: 0,
@@ -34,27 +35,29 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 export const PostsList=()=> {
-    const classes = useStyles();
     const posts = useSelector(state=>state.posts.posts);
     const theme = useSelector(state=>state.theme.theme);
+    const classes = useStyles(theme);
+
+    console.log("theme fomposts",theme)
     const postsRender=posts.map(post=>{
         return(
-            <Card className={classes.root}>
-                <Link to={`/posts/${post.id}`}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {post.username[0]}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-          </IconButton>
-        }
-        title={post.author}
-        subheader={`@${post.username}`}
-      />
-      </Link>
+            <Card className={classes.root}  color={themes[theme].secondary}>
+              <Link to={`/posts/${post.id}`} style={{textDecoration:"none"}}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="recipe" className={classes.avatar}>
+                    {post.username[0]}
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="settings">
+                  </IconButton>
+                }
+                title={post.author}
+                subheader={`@${post.username}`}
+              />
+              </Link>
             <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {post.content}
@@ -65,7 +68,7 @@ export const PostsList=()=> {
 
     })
     return (
-        <section style={{backgroundColor:themes[theme].secondary}}>
+        <section backgroundColor={themes[theme].secondary} >
             {postsRender}
         </section>
     )
