@@ -9,7 +9,7 @@ const initialState = {
       user: nanoid(),
       author: "TImes Now",
       username: "TimesNoe",
-      reactions: {"❤": 5, "😭": 2},
+      reactions: {"heart": 5, "cry": 2,"comments":2},
       hashes: ["hello"],
     },
     {
@@ -19,7 +19,7 @@ const initialState = {
       user: nanoid(),
       author: "TImes Now",
       username: "TimesNoe",
-      reactions: {"❤": 5, "😭": 2},
+      reactions: {"heart": 5, "cry": 2,"comments":4},
       hashes: ["hello"],
     },
   ],
@@ -27,6 +27,13 @@ const initialState = {
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    incrementReaction:(state,action)=>{
+      console.log({action});
+      const post = state.posts.find(post=>post.id===action.payload.id);
+      post.reactions[action.payload.reaction]++;
+    }
+  },
 });
+export const {incrementReaction} = postsSlice.actions;
 export default postsSlice.reducer;

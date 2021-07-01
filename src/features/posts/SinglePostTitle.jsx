@@ -26,6 +26,12 @@ const useStyles = makeStyles({
     light: { color: "black" },
     dark: { color: "white" },
   },
+  titlelight: {
+    color: "black",
+  },
+  titledark: {
+    color: "white",
+  },
   subHeader: {
     light: {
       color: "white",
@@ -52,7 +58,7 @@ export const SinglePostTitle = ({ post }) => {
     <CardHeader
       avatar={
         <Avatar
-          aria-label="recipe"
+          aria-label="avatar"
           className={
             classes[
               "avatar" + avatarBackgroundColors[Math.floor(Math.random() * 3)]
