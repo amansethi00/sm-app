@@ -3,7 +3,7 @@ import { IconButton, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { incrementReaction } from "./postsSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     light: {

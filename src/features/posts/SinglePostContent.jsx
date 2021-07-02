@@ -14,6 +14,7 @@ const useStyles = makeStyles({
   },
 });
 export const SinglePostContent = ({ post }) => {
+  console.log("single psot content", { post });
   const theme = useSelector((state) => state.theme.theme);
   const classes = useStyles();
   const typographyColors = {

@@ -19,15 +19,30 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid #383C3F",
   },
 }));
-export const SinglePost = () => {
+export const SinglePost = ({
+  postToRender,
+  areCommentsAndReactionsDisabled,
+}) => {
   const { postId } = useParams();
   const classes = useStyles();
   const theme = useSelector((state) => state.theme.theme);
   console.log({ theme });
   console.log({ postId });
-  const post = useSelector((state) =>
+  let post = useSelector((state) =>
     state.posts.posts.find((post) => post.id === postId)
   );
+  post = postToRender ?? post;
+
+  console.log({ post });
+  const comments = post?.comments?.map((postedComment) => {
+    return (
+      <SinglePost
+        postToRender={postedComment}
+        areCommentsAndReactionsDisabled
+      />
+    );
+  });
+
   return (
     <section
       backgroundColor={theme === "light" ? "white" : "black"}
@@ -40,10 +55,16 @@ export const SinglePost = () => {
         <SinglePostTitle post={post} />
         <SinglePostContent post={post} />
       </Card>
-      <Card className={classes["root" + theme]}>
-        <SinglePostReactionComponent post={post} />
-      </Card>
-      <InputComment />
+      {!areCommentsAndReactionsDisabled && (
+        <>
+          <Card className={classes["root" + theme]}>
+            <SinglePostReactionComponent post={post} />
+          </Card>
+          <InputComment />
+        </>
+      )}
+
+      {comments}
     </section>
   );
 };
