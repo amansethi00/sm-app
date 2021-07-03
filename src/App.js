@@ -10,6 +10,7 @@ import { useTheme } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { InputPost } from "./features/posts/InputPost";
 import { Homepage } from "./Homepage";
+import { UserProfile } from "./features/user/UserProfile";
 function App() {
   const { theme } = useSelector((state) => state.theme);
   return (
@@ -17,6 +18,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/:username" element={<UserProfile />} />
         <Route path="/posts/:postId" element={<SinglePost />} />
         <Route path="/compose/post" element={<InputPost />} />
       </Routes>

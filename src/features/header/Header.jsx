@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,6 +12,9 @@ import { themes } from "../themes/getTheme";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import { toggleTheme } from "../themes/themeSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { Avatar } from "@material-ui/core";
+import { NavigateBackButton } from "./NavigateBackButton";
 const useStyles = makeStyles((theme) => ({
   rootdark: {
     flexGrow: 1,
@@ -28,10 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
+    display: "block",
+    marginLeft: "1.5rem",
+    fontWeight: "bolder",
+    // [theme.breakpoints.up("sm")]: {
+    //   display: "block",
+    // },
   },
   lightModeIcon: {
     color: "white",
@@ -46,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginLeft: 0,
+    marginLeft: "1rem ",
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
@@ -78,31 +83,41 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    backgroundColor: "#3f51b5",
+  },
 }));
 
 export function Header() {
   const classes = useStyles();
   const { theme } = useSelector((state) => state.theme);
+  const user = useSelector((state) => state.user);
+  const header = useSelector((state) => state.header);
   const dispatch = useDispatch();
   const changeTheme = () => {
     dispatch(toggleTheme());
   };
   console.log("theme from header", theme);
+  console.log({ header });
   return (
     <AppBar position="static" className={classes["root" + theme]}>
       <Toolbar>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="open drawer"
-        >
-          <MenuIcon />
-        </IconButton>
+        {header.title === "Home" ? (
+          <Link to={`/${user.username}`}>
+            <Avatar className={classes.small} aria-label="avatar">
+              {user.username[0].toUpperCase()}
+            </Avatar>
+          </Link>
+        ) : (
+          <NavigateBackButton />
+        )}
+
         <Typography className={classes.title} variant="h6" noWrap>
-          Material-UI
+          {header.title}
         </Typography>
-        <div className={classes.search}>
+        {/* <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
@@ -114,7 +129,7 @@ export function Header() {
             }}
             inputProps={{ "aria-label": "search" }}
           />
-        </div>
+        </div> */}
         {theme === "dark" ? (
           <IconButton
             aria-label="light-mode-icon"

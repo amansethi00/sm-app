@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PostsList } from "./features/posts";
 import { Fab, makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateHeader } from "./features/header/headerSlice";
 const useStyles = makeStyles({
   button: {
     position: "fixed",
@@ -13,6 +15,10 @@ const useStyles = makeStyles({
 });
 export const Homepage = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(updateHeader({ title: "Home" }));
+  }, []);
   return (
     <section>
       <Link to="/compose/post">

@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { SinglePostTitle } from "./SinglePostTitle";
@@ -8,6 +8,7 @@ import { SinglePostReactionComponent } from "./SinglePostReactionComponent";
 import { Card } from "@material-ui/core";
 import { themes } from "../themes/getTheme";
 import { InputComment } from "./InputComment";
+import { updateHeader } from "../header/headerSlice";
 const useStyles = makeStyles((theme) => ({
   rootlight: {
     maxWidth: "100%",
@@ -26,6 +27,7 @@ export const SinglePost = ({
   const { postId } = useParams();
   const classes = useStyles();
   const theme = useSelector((state) => state.theme.theme);
+  let dispatch = useDispatch();
   console.log({ theme });
   console.log({ postId });
   let post = useSelector((state) =>
@@ -42,7 +44,9 @@ export const SinglePost = ({
       />
     );
   });
-
+  useEffect(() => {
+    dispatch(updateHeader({ title: "Post" }));
+  });
   return (
     <section
       backgroundColor={theme === "light" ? "white" : "black"}

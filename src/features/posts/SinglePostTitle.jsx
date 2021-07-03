@@ -65,7 +65,7 @@ export const SinglePostTitle = ({ post }) => {
             ]
           }
         >
-          {post.username[0]}
+          {post.username[0].toUpperCase()}
         </Avatar>
       }
       className={classes.title[theme]}

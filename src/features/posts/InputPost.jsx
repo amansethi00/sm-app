@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InputTextField } from "./InputTextField";
 import { makeStyles } from "@material-ui/core";
 import { Box, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "./postsSlice";
 import { useNavigate } from "react-router-dom";
+import { updateHeader } from "../header/headerSlice";
 const useStyles = makeStyles({
   root: {
     padding: "1rem",
@@ -39,6 +40,9 @@ export const InputPost = () => {
     setInputText("");
     navigate("/");
   };
+  useEffect(() => {
+    dispatch(updateHeader({ title: "" }));
+  }, []);
   return (
     <section className={classes.root}>
       <InputTextField inputText={inputText} setInputText={setInputText} />

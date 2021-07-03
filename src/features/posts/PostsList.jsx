@@ -56,7 +56,5 @@ export const PostsList = () => {
       </Card>
     );
   });
-  return (
-    <section backgroundColor={themes[theme].secondary}>{postsRender}</section>
-  );
+  return <section>{postsRender}</section>;
 };
