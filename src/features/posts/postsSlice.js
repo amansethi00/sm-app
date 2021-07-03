@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, current, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
   posts: [
@@ -47,7 +47,21 @@ export const postsSlice = createSlice({
       const post = state.posts.find((post) => post.id === action.payload.id);
       post.reactions[action.payload.reaction]++;
     },
+    addComment: (state, action) => {
+      const post = state.posts.find((post) => post.id === action.payload.id);
+      post.comments.push(action.payload.comment);
+    },
+    addPost: (state, action) => {
+      console.log(current(state));
+      const post = action.payload.post;
+      post.reactions = { heart: 1, cry: 0, comments: 0 };
+      post.comments = [];
+      post.id = nanoid();
+      post.timestamp = new Date().toISOString();
+
+      state.posts.push({ ...post });
+    },
   },
 });
-export const { incrementReaction } = postsSlice.actions;
+export const { incrementReaction, addComment, addPost } = postsSlice.actions;
 export default postsSlice.reducer;

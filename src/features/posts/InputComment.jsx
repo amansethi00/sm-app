@@ -1,87 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { red, green, blue } from "@material-ui/core/colors";
 import { Button } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import { Box } from "@material-ui/core";
+import { addComment } from "./postsSlice";
+import { InputTextField } from "./InputTextField";
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: "1rem",
   },
-  avatarRed: {
-    backgroundColor: red[500],
-  },
-  avatarBlue: {
-    backgroundColor: blue[500],
-  },
-  avatarGreen: {
-    backgroundColor: green[500],
-  },
-  textFieldlight: {
-    width: "100%",
-    color: "black",
-  },
-  textFielddark: {
-    width: "100%",
-    color: "white",
-  },
+
   buttonlight: {
     borderRadius: "2rem",
+    marginTop: "0.5rem",
   },
   buttondark: {
     borderRadius: "2rem",
+    marginTop: "0.5rem",
   },
 }));
-export const InputComment = () => {
+export const InputComment = ({ post }) => {
   const theme = useSelector((state) => state.theme.theme);
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  const [inputComment, setInputComment] = useState("");
   const user = useSelector((state) => {
     console.log(state);
     return state.user;
   });
   console.log({ user });
-  let avatarBackgroundColors = ["Red", "Blue", "Green"];
-  const classes = useStyles();
+
+  const commentHandler = () => {
+    if (inputComment !== "") {
+      const comment = {
+        content: inputComment,
+        username: user.username,
+        author: user.name,
+      };
+      dispatch(addComment({ id: post.id, comment }));
+      setInputComment("");
+    }
+  };
   return (
-    <Box display="flex" className={classes.root}>
-      <Grid container spacing={1} alignItems="flex-start">
-        <Grid item>
-          <Avatar
-            aria-label="avatar"
-            className={
-              classes[
-                "avatar" + avatarBackgroundColors[Math.floor(Math.random() * 3)]
-              ]
-            }
-          >
-            {user.username[0]}
-          </Avatar>
-        </Grid>
-        <Grid item style={{ width: "75%" }}>
-          <TextField
-            spellCheck="false"
-            className={classes["textField" + theme]}
-            InputProps={{ className: classes["textField" + theme] }}
-            multiline
-            id="comment input"
-            width="75%"
-          />
-        </Grid>
-      </Grid>
-      <Box justifyContent="flex-end" alignSelf="flex-end">
+    <Box display="flex" flexDirection="row" className={classes.root}>
+      <InputTextField setInputText={setInputComment} inputText={inputComment} />
+      <Box justifyContent="center" alignSelf="flex-start">
         <Button
-          // style={{ backgroundColor: "rgb(29, 161, 242)" }}
           color="primary"
-          // color="rgb(29, 161, 242)"
+          onClick={commentHandler}
           variant="contained"
           className={classes["button" + theme]}
           endIcon={<SendIcon />}
         >
           Reply
-        </Button>{" "}
+        </Button>
       </Box>
     </Box>
   );

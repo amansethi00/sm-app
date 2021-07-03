@@ -60,7 +60,7 @@ export const SinglePost = ({
           <Card className={classes["root" + theme]}>
             <SinglePostReactionComponent post={post} />
           </Card>
-          <InputComment />
+          <InputComment post={post} />
         </>
       )}
 
