@@ -1,15 +1,25 @@
 import React from "react";
 import { Avatar, CardHeader } from "@material-ui/core";
 import {
+  Card,
   CardMedia,
   Typography,
   Button,
   Box,
   CardContent,
+  CardActions,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { UserFollowerAndFollowing } from "./UserFollowerAndFollowing";
+import { UserPosts } from "./UserPosts";
 const useStyles = makeStyles((theme) => ({
+  rootlight: {
+    backgroundColor: "var(--primary)",
+  },
+  rootdark: {
+    backgroundColor: "var(--primary)",
+  },
   media: {
     height: 140,
   },
@@ -64,13 +74,23 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "0rem",
     color: "white",
   },
+  cardAction: {
+    paddingBottom: "0rem",
+  },
+  cardActionButton: {
+    color: "#3f51b5",
+    borderBottom: "0.5rem solid #3f51b5",
+  },
 }));
 export const UserInfo = ({ user }) => {
   const theme = useSelector((state) => state.theme.theme);
   const classes = useStyles();
   return (
     <div>
-      <section style={{ position: "relative" }}>
+      <Card
+        className={classes["root" + theme]}
+        style={{ position: "relative" }}
+      >
         <CardMedia
           className={classes.media}
           image="https://res.cloudinary.com/devcl4ue8/image/upload/v1625392625/7986cb_ozapxu.png"
@@ -112,8 +132,27 @@ export const UserInfo = ({ user }) => {
             cook together with your guests. Add 1 cup of frozen peas along with
             the mussels, if you like.
           </Typography>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <UserFollowerAndFollowing
+              count={user.following}
+              title="following"
+            />
+            <UserFollowerAndFollowing
+              count={user.followers}
+              title="followers"
+            />
+          </div>
         </CardContent>
-      </section>
+        <CardActions className={classes.cardAction}>
+          <Button className={classes.cardActionButton}>user's posts</Button>
+        </CardActions>
+      </Card>
+      <UserPosts user={user} />
     </div>
   );
 };

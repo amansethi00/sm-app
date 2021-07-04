@@ -35,11 +35,12 @@ const linkStyle = {
   },
 };
 
-export const PostsList = () => {
-  const posts = useSelector((state) => state.posts.posts);
+export const PostsList = ({ postsToRender }) => {
+  let posts = useSelector((state) => state.posts.posts);
+  posts = postsToRender ?? posts;
   const theme = useSelector((state) => state.theme.theme);
   const classes = useStyles();
-
+  console.log({ postsToRender });
   console.log("theme fomposts", theme);
 
   const postsRender = posts.map((post) => {

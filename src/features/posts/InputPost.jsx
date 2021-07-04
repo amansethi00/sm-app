@@ -42,7 +42,7 @@ export const InputPost = () => {
     navigate("/");
   };
   useEffect(() => {
-    dispatch(updateHeader({ title: "" }));
+    dispatch(updateHeader({ title: "new post" }));
   }, []);
   return (
     <section className={classes.root}>

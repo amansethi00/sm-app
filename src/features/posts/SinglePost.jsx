@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   carddark: {
     backgroundColor: "var(--primary)",
-    borderBottom: "1px solid #383C3F",
   },
 }));
 export const SinglePost = ({
