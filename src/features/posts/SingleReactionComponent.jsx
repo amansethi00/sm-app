@@ -3,7 +3,7 @@ import { IconButton, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { incrementReaction } from "./postsSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     light: {
@@ -31,11 +31,14 @@ export const SingleReactionComponent = ({
   const classes = useStyles();
   const dispatch = useDispatch();
   let navigate = useNavigate();
-
+  const { postId } = useParams();
   const handleReactionCount = (reaction) => {
     console.log(reaction);
     switch (reaction) {
       case "comments":
+        if (postId) {
+          return;
+        }
         return navigate(`/posts/${post.id}`);
       default:
         dispatch(incrementReaction({ id: post.id, reaction }));

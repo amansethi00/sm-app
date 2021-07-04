@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updateHeader } from "../header/headerSlice";
+import { FAB } from "../posts/FAB";
 import { UserInfo } from "./UserInfo";
 
 export const UserProfile = () => {
@@ -13,8 +14,8 @@ export const UserProfile = () => {
   }, []);
   return (
     <div>
-      <h1>Hello {username}</h1>
       <UserInfo user={user} />
+      <FAB />
     </div>
   );
 };

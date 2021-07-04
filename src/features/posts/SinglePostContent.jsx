@@ -4,13 +4,13 @@ import { CardContent } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles({
-  cardContent: {
-    light: {
-      color: "black",
-    },
-    dark: {
-      color: "white",
-    },
+  cardContentlight: {
+    color: "black",
+    paddingTop: "0rem",
+  },
+  cardContentdark: {
+    color: "white",
+    paddingTop: "0rem",
   },
 });
 export const SinglePostContent = ({ post }) => {
@@ -26,7 +26,7 @@ export const SinglePostContent = ({ post }) => {
     },
   };
   return (
-    <CardContent className={classes.cardContent[theme]}>
+    <CardContent className={classes["cardContent" + theme]}>
       <Typography
         style={{ color: typographyColors[theme].color }}
         variant="body2"

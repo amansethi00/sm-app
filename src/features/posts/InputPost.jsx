@@ -9,6 +9,7 @@ import { updateHeader } from "../header/headerSlice";
 const useStyles = makeStyles({
   root: {
     padding: "1rem",
+    paddingTop: "4rem",
     display: "flex",
     flexDirection: "column",
   },

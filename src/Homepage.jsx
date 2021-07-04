@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
 import { PostsList } from "./features/posts";
 import { Fab, makeStyles } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateHeader } from "./features/header/headerSlice";
+import { FAB } from "./features/posts/FAB";
 const useStyles = makeStyles({
-  button: {
-    position: "fixed",
-    bottom: "2rem",
-    right: "2rem",
-    zIndex: 1000,
+  root: {
+    paddingTop: "3rem",
   },
 });
 export const Homepage = () => {
@@ -20,13 +17,9 @@ export const Homepage = () => {
     dispatch(updateHeader({ title: "Home" }));
   }, []);
   return (
-    <section>
-      <Link to="/compose/post">
-        <Fab className={classes.button} color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
-      </Link>
+    <section className={classes.root}>
       <PostsList />
+      <FAB />
     </section>
   );
 };

@@ -6,9 +6,9 @@ import { SinglePostTitle } from "./SinglePostTitle";
 import { SinglePostContent } from "./SinglePostContent";
 import { SinglePostReactionComponent } from "./SinglePostReactionComponent";
 import { Card } from "@material-ui/core";
-import { themes } from "../themes/getTheme";
 import { InputComment } from "./InputComment";
 import { updateHeader } from "../header/headerSlice";
+import { FAB } from "./FAB";
 const useStyles = makeStyles((theme) => ({
   rootlight: {
     maxWidth: "100%",
@@ -16,6 +16,13 @@ const useStyles = makeStyles((theme) => ({
   },
   rootdark: {
     maxWidth: "100%",
+    backgroundColor: "var(--primary)",
+    borderBottom: "1px solid #383C3F",
+  },
+  cardlight: {
+    backgroundColor: "var(--primary)",
+  },
+  carddark: {
     backgroundColor: "var(--primary)",
     borderBottom: "1px solid #383C3F",
   },
@@ -49,19 +56,20 @@ export const SinglePost = ({
   });
   return (
     <section
+      style={{ paddingTop: postToRender === undefined ? "3rem" : "" }}
       backgroundColor={theme === "light" ? "white" : "black"}
       className={classes["root" + theme]}
     >
       <Card
         backgroundColor={theme === "light" ? "white" : "black"}
-        className={classes["root" + theme]}
+        className={classes["card" + theme]}
       >
         <SinglePostTitle post={post} />
         <SinglePostContent post={post} />
       </Card>
       {!areCommentsAndReactionsDisabled && (
         <>
-          <Card className={classes["root" + theme]}>
+          <Card className={classes["card" + theme]}>
             <SinglePostReactionComponent post={post} />
           </Card>
           <InputComment post={post} />
@@ -69,6 +77,7 @@ export const SinglePost = ({
       )}
 
       {comments}
+      <FAB />
     </section>
   );
 };

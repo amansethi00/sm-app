@@ -102,7 +102,7 @@ export function Header() {
   console.log("theme from header", theme);
   console.log({ header });
   return (
-    <AppBar position="static" className={classes["root" + theme]}>
+    <AppBar position="fixed" className={classes["root" + theme]}>
       <Toolbar>
         {header.title === "Home" ? (
           <Link to={`/${user.username}`}>

@@ -28,6 +28,7 @@ const useStyles = makeStyles({
   },
   titlelight: {
     color: "black",
+    paddingBottom: "0rem",
   },
   titledark: {
     color: "white",
