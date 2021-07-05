@@ -46,7 +46,9 @@ export const PostsList = ({ postsToRender }) => {
   const postsRender = posts.map((post) => {
     return (
       <Card className={classes["root" + theme]}>
-        <SinglePostTitle post={post} />
+        <Link to={`/${post.username}`}>
+          <SinglePostTitle post={post} />
+        </Link>
         <Link
           to={`/posts/${post.id}`}
           style={{ textDecoration: "none", color: linkStyle[theme].color }}

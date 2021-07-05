@@ -4,11 +4,14 @@ import { useParams } from "react-router-dom";
 import { updateHeader } from "../header/headerSlice";
 import { FAB } from "../posts/FAB";
 import { UserInfo } from "./UserInfo";
-
-export const UserProfile = () => {
+import { userLists } from "../../userLists";
+export const UserProfile = ({ viewUser }) => {
   const { username } = useParams();
-  const user = useSelector((state) => state.user);
+  let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
+  if (user.username !== username) {
+    user = userLists.find((user) => user.username === username);
+  }
   useEffect(() => {
     dispatch(updateHeader({ title: username }));
   }, []);

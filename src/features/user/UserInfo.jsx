@@ -68,10 +68,12 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContentlight: {
     paddingTop: "0rem",
+    paddingBottom: "0rem",
     color: "black",
   },
   cardContentdark: {
     paddingTop: "0rem",
+    paddingBottom: "0rem",
     color: "white",
   },
   cardAction: {
@@ -128,9 +130,7 @@ export const UserInfo = ({ user }) => {
             color="textSecondary"
             component="p"
           >
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+            {user.bio}
           </Typography>
           <div
             style={{
