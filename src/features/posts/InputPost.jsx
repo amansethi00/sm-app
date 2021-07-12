@@ -3,7 +3,7 @@ import { InputTextField } from "./InputTextField";
 import { makeStyles } from "@material-ui/core";
 import { Box, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "./postsSlice";
+import { addPost, createNewPost } from "./postsSlice";
 import { useNavigate } from "react-router-dom";
 import { updateHeader } from "../header/headerSlice";
 const useStyles = makeStyles({
@@ -24,20 +24,27 @@ export const InputPost = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const inputPostHandler = () => {
+  const inputPostHandler = async () => {
     let rule = /^\s*$/;
     if (rule.exec(inputText)) {
       return;
     }
-    dispatch(
-      addPost({
-        post: {
-          content: inputText,
-          author: user.name,
-          username: user.username,
-        },
-      })
-    );
+    console.log("dsfhjsfbhj");
+    const respone = await createNewPost({
+      content: inputText,
+      author: user.name,
+      username: user.username,
+    });
+    console.log({ respone });
+    // dispatch(
+    //   addPost({
+    //     post: {
+    //       content: inputText,
+    //       author: user.name,
+    //       username: user.username,
+    //     },
+    //   })
+    // );
     setInputText("");
     navigate("/");
   };

@@ -46,13 +46,12 @@ export const SingleReactionComponent = ({
   };
   return (
     <IconButton
-      color="white"
       className={classes["icon" + theme]}
       aria-label={label ? label : "reaction"}
       size="small"
       onClick={() => handleReactionCount(reaction)}
     >
-      <Icon color="white" className={classes["icon" + theme]} />
+      <Icon className={classes["icon" + theme]} />
       <Typography style={{ padding: "0.5rem" }} variant="body1">
         {count}
       </Typography>
