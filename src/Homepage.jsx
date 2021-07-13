@@ -10,7 +10,7 @@ import { fetchAllPosts } from "./services";
 import { fetchPosts } from "./features/posts/postsSlice";
 const useStyles = makeStyles({
   root: {
-    paddingTop: "3rem",
+    paddingTop: "4rem",
   },
 });
 

@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { updateHeader } from "./features/header/headerSlice";
 import { PrivateRoute } from "./PrivateRoute";
 import { getUserByUsername } from "./features/user/userSlice";
+import { BottomNavbar } from "./features/BottomNavbar";
 function App() {
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
@@ -30,28 +31,30 @@ function App() {
     }
   }, []);
   return (
-    <div className="App" style={{ backgroundColor: themes[theme].secondary }}>
-      <Header />
-      <Routes>
-        <Route path="/signup" element={<SignIn />} />
-        <Route path="/login" element={<Login />} />
-        <PrivateRoute path="/" element={<Homepage />} />
-        <PrivateRoute path="/:username" element={<UserProfile />} />
-        <PrivateRoute path="/posts/:postId" element={<SinglePost />} />
-        <PrivateRoute path="/compose/post" element={<InputPost />} />
-      </Routes>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-    </div>
+    <>
+      <div className="App" style={{ backgroundColor: themes[theme].secondary }}>
+        <Header />
+        <Routes>
+          <Route path="/signup" element={<SignIn />} />
+          <Route path="/login" element={<Login />} />
+          <PrivateRoute path="/" element={<Homepage />} />
+          <PrivateRoute path="/:username" element={<UserProfile />} />
+          <PrivateRoute path="/posts/:postId" element={<SinglePost />} />
+          <PrivateRoute path="/compose/post" element={<InputPost />} />
+        </Routes>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </div>
+    </>
   );
 }
 

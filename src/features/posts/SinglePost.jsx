@@ -55,7 +55,7 @@ export const SinglePost = ({
   });
   return (
     <section
-      style={{ paddingTop: postToRender === undefined ? "3rem" : "" }}
+      style={{ paddingTop: postToRender === undefined ? "4rem" : "" }}
       backgroundColor={theme === "light" ? "white" : "black"}
       className={classes["root" + theme]}
     >

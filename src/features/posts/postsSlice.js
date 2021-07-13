@@ -91,7 +91,7 @@ export const postsSlice = createSlice({
       state.status = "success";
       const post = action.payload.post;
       console.log("new post added");
-      state.posts.push({ ...post });
+      state.posts.unshift({ ...post });
     },
     [fetchPosts.rejected]: (state, action) => {
       state.status = "failed";

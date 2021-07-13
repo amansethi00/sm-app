@@ -16,9 +16,11 @@ import { UserPosts } from "./UserPosts";
 const useStyles = makeStyles((theme) => ({
   rootlight: {
     backgroundColor: "var(--primary)",
+    marginTop: "1rem",
   },
   rootdark: {
     backgroundColor: "var(--primary)",
+    marginTop: "1rem",
   },
   media: {
     height: 140,
@@ -86,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const UserInfo = ({ user }) => {
   const theme = useSelector((state) => state.theme.theme);
+  const currentUser = useSelector((state) => state.user);
   const classes = useStyles();
   return (
     <div>
@@ -98,7 +101,9 @@ export const UserInfo = ({ user }) => {
           image="https://res.cloudinary.com/devcl4ue8/image/upload/v1625392625/7986cb_ozapxu.png"
           title="Contemplative Reptile"
         />
-        <Avatar className={classes.large}>{user.username[0]}</Avatar>
+        <Avatar className={classes.large}>
+          {user.username[0].toUpperCase()}
+        </Avatar>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <CardHeader
             className={classes.header}
@@ -114,13 +119,23 @@ export const UserInfo = ({ user }) => {
             }
           />
           <Box>
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-            >
-              Edit Profile
-            </Button>
+            {user.username === currentUser.username ? (
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.button}
+              >
+                Edit Profile
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.button}
+              >
+                Follow
+              </Button>
+            )}
           </Box>
         </div>
         <CardContent className={classes["cardContent" + theme]}>
