@@ -6,12 +6,7 @@ import { red, green, blue } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   linkStyle: {
-    light: {
-      color: "black",
-    },
-    dark: {
-      color: "white",
-    },
+    textDecoration: "none",
   },
   avatarRed: {
     backgroundColor: red[500],
@@ -56,9 +51,9 @@ export const SinglePostTitle = ({ post }) => {
     },
   };
   return (
-    <Link to={`/${post.username}`}>
-      <CardHeader
-        avatar={
+    <CardHeader
+      avatar={
+        <Link className={classes.linkStyle} to={`/${post.username}`}>
           <Avatar
             aria-label="avatar"
             className={
@@ -69,23 +64,25 @@ export const SinglePostTitle = ({ post }) => {
           >
             {post.username[0].toUpperCase()}
           </Avatar>
-        }
-        className={classes.title[theme]}
-        action={<IconButton aria-label="settings"></IconButton>}
-        title={
+        </Link>
+      }
+      className={classes.title[theme]}
+      action={<IconButton aria-label="settings"></IconButton>}
+      title={
+        <Link className={classes.linkStyle} to={`/${post.username}`}>
           <Typography style={{ color: typographyColors[theme].color }}>
             {post.author}
           </Typography>
-        }
-        subheader={
-          <Typography
-            style={{ color: typographyColors[theme].color }}
-            className={classes.subHeader[theme]}
-          >
-            @{post.username}
-          </Typography>
-        }
-      />
-    </Link>
+        </Link>
+      }
+      subheader={
+        <Typography
+          style={{ color: typographyColors[theme].color }}
+          className={classes.subHeader[theme]}
+        >
+          @{post.username}
+        </Typography>
+      }
+    />
   );
 };

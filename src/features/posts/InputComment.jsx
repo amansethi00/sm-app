@@ -8,7 +8,7 @@ import { red, green, blue } from "@material-ui/core/colors";
 import { Button } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import { Box } from "@material-ui/core";
-import { addComment } from "./postsSlice";
+import { addComment, createNewComment } from "./postsSlice";
 import { InputTextField } from "./InputTextField";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,11 +38,13 @@ export const InputComment = ({ post }) => {
   const commentHandler = () => {
     if (inputComment !== "") {
       const comment = {
+        postId: post.id,
         content: inputComment,
         username: user.username,
         author: user.name,
       };
-      dispatch(addComment({ id: post.id, comment }));
+      dispatch(createNewComment(comment));
+      // dispatch(addComment({ id: post.id, comment }));
       setInputComment("");
     }
   };

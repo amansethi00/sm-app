@@ -30,12 +30,13 @@ export const InputPost = () => {
       return;
     }
     console.log("dsfhjsfbhj");
-    const respone = await createNewPost({
+    const post = {
       content: inputText,
       author: user.name,
       username: user.username,
-    });
-    console.log({ respone });
+    };
+    dispatch(createNewPost(post));
+
     // dispatch(
     //   addPost({
     //     post: {

@@ -1,16 +1,16 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  title: "Home",
+  title: "Signup",
 };
 export const headerSlice = createSlice({
   name: "header",
   initialState,
   reducers: {
     updateHeader(state, action) {
-      const {title} = action.payload;
+      const { title } = action.payload;
       state.title = title;
     },
   },
 });
-export const {updateHeader} = headerSlice.actions;
+export const { updateHeader } = headerSlice.actions;
 export default headerSlice.reducer;

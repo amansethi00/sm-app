@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementReaction } from "./postsSlice";
+import { incrementReaction, postAreaction } from "./postsSlice";
 import { useNavigate, useParams } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +41,12 @@ export const SingleReactionComponent = ({
         }
         return navigate(`/posts/${post.id}`);
       default:
-        dispatch(incrementReaction({ id: post.id, reaction }));
+        const postIdAndReaction = {
+          postId: post.id,
+          reaction: reaction,
+        };
+        dispatch(postAreaction(postIdAndReaction));
+      // dispatch(incrementReaction({ id: post.id, reaction }));
     }
   };
   return (
