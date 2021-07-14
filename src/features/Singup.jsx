@@ -15,6 +15,7 @@ import Container from "@material-ui/core/Container";
 import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -73,11 +74,11 @@ export function SignIn() {
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   let regex = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
-
+  let navigate = useNavigate();
   const signUpHandler = async (e) => {
     e.preventDefault();
     if (!username.match(regex)) {
-      toast.info("please choose appropriate username");
+      return toast.info("please choose appropriate username");
     }
     try {
       const response = await axios.post(
@@ -90,6 +91,7 @@ export function SignIn() {
       console.log(response);
       if (response.data.success) {
         toast.success("user created succesfuly now login ");
+        navigate("/login");
         setUserName("");
         setName("");
       } else {
