@@ -53,7 +53,7 @@ export const InputPost = () => {
     dispatch(updateHeader({ title: "new post" }));
   }, []);
   return (
-    <section className={classes.root}>
+    <section className={classes.root} style={{ paddingLeft: "18rem" }}>
       <InputTextField inputText={inputText} setInputText={setInputText} />
       <Box justifyContent="flex-end" alignSelf="flex-end">
         <Button

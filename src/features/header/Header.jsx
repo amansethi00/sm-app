@@ -12,15 +12,32 @@ import Brightness3Icon from "@material-ui/icons/Brightness3";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import { toggleTheme } from "../themes/themeSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { Avatar } from "@material-ui/core";
+import { Avatar, useMediaQuery } from "@material-ui/core";
 import { NavigateBackButton } from "./NavigateBackButton";
 const useStyles = makeStyles((theme) => ({
   rootdark: {
     flexGrow: 1,
     backgroundColor: "black",
     color: "white",
+    paddingLeft: "17rem",
+    borderBottom: "1px solid #383C3F",
   },
   rootlight: {
+    flexGrow: 1,
+    backgroundColor: "white",
+    color: "black",
+    paddingLeft: "17rem",
+    // display: "flex",
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+  rootmobiledark: {
+    flexGrow: 1,
+    backgroundColor: "black",
+    color: "white",
+    borderBottom: "1px solid #383C3F",
+  },
+  rootmobilelight: {
     flexGrow: 1,
     backgroundColor: "white",
     color: "black",
@@ -97,6 +114,7 @@ export function Header() {
   const { theme } = useSelector((state) => state.theme);
   const user = useSelector((state) => state.user);
   const header = useSelector((state) => state.header);
+  const mobileView = useMediaQuery("(max-width:666px)");
   const dispatch = useDispatch();
   const changeTheme = () => {
     dispatch(toggleTheme());
@@ -104,7 +122,12 @@ export function Header() {
   console.log("theme from header", theme);
   console.log({ header });
   return (
-    <AppBar position="fixed" className={classes["root" + theme]}>
+    <AppBar
+      position="fixed"
+      className={
+        mobileView ? classes["rootmobile" + theme] : classes["root" + theme]
+      }
+    >
       {(header.title === "Signup" || header.title === "Login") && (
         <Toolbar>
           <>

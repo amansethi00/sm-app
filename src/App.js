@@ -20,6 +20,10 @@ import { updateHeader } from "./features/header/headerSlice";
 import { PrivateRoute } from "./PrivateRoute";
 import { getUserByUsername } from "./features/user/userSlice";
 import { BottomNavbar } from "./features/BottomNavbar";
+import { NewHomePage } from "./NewHomePage";
+import { LeftBar } from "./features/LeftBar";
+import NotFoundPage from "./NotFoundPage";
+import { SearchPage } from "./SearchPage";
 function App() {
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
@@ -32,15 +36,19 @@ function App() {
   }, []);
   return (
     <>
+      <Header />
+      <LeftBar />
       <div className="App" style={{ backgroundColor: themes[theme].secondary }}>
-        <Header />
         <Routes>
           <Route path="/signup" element={<SignIn />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/home" element={<NewHomePage />} />
           <PrivateRoute path="/" element={<Homepage />} />
           <PrivateRoute path="/:username" element={<UserProfile />} />
           <PrivateRoute path="/posts/:postId" element={<SinglePost />} />
           <PrivateRoute path="/compose/post" element={<InputPost />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <ToastContainer
           position="bottom-right"

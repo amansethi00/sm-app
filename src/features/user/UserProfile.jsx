@@ -6,13 +6,18 @@ import { FAB } from "../posts/FAB";
 import { UserInfo } from "./UserInfo";
 import { userLists } from "../../userLists";
 import { getUser } from "./services";
+import { makeStyles } from "@material-ui/core";
+const useStyles = makeStyles({
+  root: {
+    paddingLeft: "18rem",
+  },
+});
 export const UserProfile = ({ viewUser }) => {
   const { username } = useParams();
   const [user, setUser] = useState(useSelector((state) => state.user));
   let dispatch = useDispatch();
-  // if (user.username !== username) {
-  //   user = userLists.find((user) => user.username === username);
-  // }
+  const classes = useStyles();
+
   const updateUser = async () => {
     setUser(await getUser(username));
   };
@@ -23,7 +28,7 @@ export const UserProfile = ({ viewUser }) => {
     dispatch(updateHeader({ title: username }));
   }, []);
   return (
-    <div>
+    <div className={classes.root}>
       <UserInfo user={user} />
       <FAB />
     </div>
