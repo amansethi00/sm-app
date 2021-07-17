@@ -5,6 +5,7 @@ import {
   TextField,
   InputAdornment,
   makeStyles,
+  useMediaQuery,
   Typography,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   inputPropsdark: {
     color: "white",
   },
+  titledark: {
+    color: "white",
+  },
 }));
 export const SearchPage = () => {
   const dispatch = useDispatch();
@@ -38,6 +42,9 @@ export const SearchPage = () => {
   const classes = useStyles();
   const posts = useSelector((state) => state.posts.posts);
   const theme = useSelector((state) => state.theme.theme);
+  const tabletView = useMediaQuery("(max-width:1200px)");
+  const mobileView = useMediaQuery("(max-width:666px)");
+
   useEffect(() => {
     dispatch(updateHeader({ title: "Search" }));
   }, []);
@@ -56,7 +63,11 @@ export const SearchPage = () => {
   return (
     <section
       className={classes.root}
-      style={{ paddingLeft: "18rem", paddingTop: "4rem" }}
+      style={{
+        paddingLeft: mobileView ? "" : "18rem",
+        paddingTop: "4rem",
+        paddingRight: tabletView ? "" : "28rem",
+      }}
     >
       <article className={classes.center}>
         <TextField
@@ -77,7 +88,9 @@ export const SearchPage = () => {
           }}
         />
         {postsToRender.length === 0 && postsToRender !== "" && (
-          <Typography variant="h5">Sorry No users found!!</Typography>
+          <Typography className={classes["title" + theme]} variant="h5">
+            Sorry No users found!!
+          </Typography>
         )}
       </article>
 

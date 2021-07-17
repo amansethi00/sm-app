@@ -9,7 +9,9 @@ import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import { NavLink } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
+import { logOutUser } from "./user/userSlice";
 const useStyles = makeStyles({
   rootlight: {
     position: "fixed",
@@ -37,7 +39,9 @@ const useStyles = makeStyles({
     color: "white",
   },
   button: {
-    width: "100%",
+    width: "auto",
+    borderRadius: "2rem",
+    padding: "0.4rem 1rem",
   },
   title: {
     fontWeight: "800",
@@ -56,6 +60,9 @@ export const LeftBar = () => {
   const theme = useSelector((state) => state.theme.theme);
   const mobileView = useMediaQuery("(max-width:666px)");
   const user = useSelector((state) => state.user);
+  const header = useSelector((state) => state.header);
+  const dispatch = useDispatch();
+  console.log({ header: header.title });
   const obj = [
     {
       to: "/home",
@@ -73,6 +80,10 @@ export const LeftBar = () => {
       icon: <PersonOutlineIcon fontSize="large" />,
     },
   ];
+  const logOutHandler = () => {
+    localStorage.removeItem("username");
+    dispatch(logOutUser());
+  };
   const renderContent = obj.map((row) => (
     <Button className={classes.button}>
       <NavLink
@@ -95,8 +106,11 @@ export const LeftBar = () => {
   return (
     <Card
       className={classes["root" + theme]}
-      style={{ display: mobileView ? "none" : "" }}
+      style={{
+        display: mobileView ? "none" : "",
+      }}
     >
+      <br />
       <svg
         aria-hidden="true"
         focusable="false"
@@ -110,7 +124,25 @@ export const LeftBar = () => {
           fill="#303F9E"
         />
       </svg>
+      <br />
       {renderContent}
+      <Button className={classes.button} onClick={logOutHandler}>
+        <NavLink
+          style={{
+            textDecoration: "none",
+            color: theme === "light" ? "black" : "white",
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          activeStyle={{ color: "#303F9E" }}
+          to="/login"
+        >
+          <ExitToAppOutlinedIcon fontSize="large" />
+          <Typography variant="h6">Log Out</Typography>
+        </NavLink>
+      </Button>
     </Card>
   );
 };

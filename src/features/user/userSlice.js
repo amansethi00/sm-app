@@ -28,6 +28,11 @@ export const userSlice = createSlice({
         ...action.payload.user,
       };
     },
+    logOutUser: (state, action) => {
+      return {
+        ...initialState,
+      };
+    },
   },
   extraReducers: {
     [getUserByUsername.fulfilled]: (state, action) => {
@@ -38,5 +43,5 @@ export const userSlice = createSlice({
     },
   },
 });
-export const { updateUser } = userSlice.actions;
+export const { updateUser, logOutUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -27,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     color: "black",
     paddingLeft: "17rem",
+    borderBottom: "1px solid rgb(239, 243, 244)",
+
     // display: "flex",
     // justifyContent: "center",
     // alignItems: "center",
@@ -41,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: "white",
     color: "black",
+    borderBottom: "1px solid rgb(239, 243, 244)",
+
     // display: "flex",
     // justifyContent: "center",
     // alignItems: "center",
@@ -115,6 +119,7 @@ export function Header() {
   const user = useSelector((state) => state.user);
   const header = useSelector((state) => state.header);
   const mobileView = useMediaQuery("(max-width:666px)");
+  const tabletView = useMediaQuery("(max-width:1200px)");
   const dispatch = useDispatch();
   const changeTheme = () => {
     dispatch(toggleTheme());
@@ -127,6 +132,7 @@ export function Header() {
       className={
         mobileView ? classes["rootmobile" + theme] : classes["root" + theme]
       }
+      style={{ paddingRight: tabletView ? "" : "28rem", boxShadow: "none" }}
     >
       {(header.title === "Signup" || header.title === "Login") && (
         <Toolbar>

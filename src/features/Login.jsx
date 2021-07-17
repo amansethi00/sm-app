@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,6 +17,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { updateUser } from "./user/userSlice";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { updateHeader } from "./header/headerSlice";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -86,7 +87,7 @@ export const Login = () => {
         const user = response.data.user;
         dispatch(updateUser({ user }));
         localStorage.setItem("username", user.username);
-        navigate("/");
+        navigate("/home");
       } else {
         toast.warn(response.data.message);
       }
@@ -94,6 +95,9 @@ export const Login = () => {
       toast.warn(error.response.data.message);
     }
   };
+  useEffect(() => {
+    dispatch(updateHeader({ title: "Login" }));
+  }, []);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

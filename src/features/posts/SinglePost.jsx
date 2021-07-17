@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { SinglePostTitle } from "./SinglePostTitle";
 import { SinglePostContent } from "./SinglePostContent";
 import { SinglePostReactionComponent } from "./SinglePostReactionComponent";
-import { Card } from "@material-ui/core";
+import { Card, useMediaQuery } from "@material-ui/core";
 import { InputComment } from "./InputComment";
 import { updateHeader } from "../header/headerSlice";
 import { FAB } from "./FAB";
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     backgroundColor: "var(--primary)",
     borderBottom: "1px solid #383C3F",
+    borderRight: "1px solid #383C3F",
   },
   cardlight: {
     backgroundColor: "var(--primary)",
@@ -33,6 +34,9 @@ export const SinglePost = ({
   const { postId } = useParams();
   const classes = useStyles();
   const theme = useSelector((state) => state.theme.theme);
+  const tabletView = useMediaQuery("(max-width:1200px)");
+  const mobileView = useMediaQuery("(max-width:666px)");
+
   let dispatch = useDispatch();
   console.log({ theme });
   console.log({ postId });
@@ -53,11 +57,13 @@ export const SinglePost = ({
   useEffect(() => {
     dispatch(updateHeader({ title: "Post" }));
   });
+
   return (
     <section
       style={{
         paddingTop: postToRender === undefined ? "4rem" : "",
-        paddingLeft: postToRender === undefined ? "18rem" : "",
+        paddingLeft: postToRender === undefined && !mobileView ? "18rem" : "",
+        marginRight: postToRender === undefined && !tabletView ? "28rem" : "",
       }}
       backgroundColor={theme === "light" ? "white" : "black"}
       className={classes["root" + theme]}

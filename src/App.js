@@ -24,9 +24,11 @@ import { NewHomePage } from "./NewHomePage";
 import { LeftBar } from "./features/LeftBar";
 import NotFoundPage from "./NotFoundPage";
 import { SearchPage } from "./SearchPage";
+import { RightBar } from "./features/RightBar";
 function App() {
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+  const header = useSelector((state) => state.header);
   useEffect(() => {
     const username = localStorage.getItem("username");
     if (username) {
@@ -37,13 +39,19 @@ function App() {
   return (
     <>
       <Header />
-      <LeftBar />
+      {header.title !== "Login" && header.title !== "Signup" && (
+        <>
+          <LeftBar />
+          <RightBar />
+        </>
+      )}
+
       <div className="App" style={{ backgroundColor: themes[theme].secondary }}>
         <Routes>
           <Route path="/signup" element={<SignIn />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/home" element={<NewHomePage />} />
+          <PrivateRoute path="/search" element={<SearchPage />} />
+          <PrivateRoute path="/home" element={<NewHomePage />} />
           <PrivateRoute path="/" element={<Homepage />} />
           <PrivateRoute path="/:username" element={<UserProfile />} />
           <PrivateRoute path="/posts/:postId" element={<SinglePost />} />

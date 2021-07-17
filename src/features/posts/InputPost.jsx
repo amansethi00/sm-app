@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { InputTextField } from "./InputTextField";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import { Box, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, createNewPost } from "./postsSlice";
+import { createNewPost } from "./postsSlice";
 import { useNavigate } from "react-router-dom";
 import { updateHeader } from "../header/headerSlice";
 const useStyles = makeStyles({
   root: {
     padding: "1rem",
-    paddingTop: "4rem",
+    paddingTop: "5rem",
     display: "flex",
     flexDirection: "column",
   },
@@ -24,6 +24,8 @@ export const InputPost = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const tabletView = useMediaQuery("(max-width:1200px)");
+  const mobileView = useMediaQuery("(max-width:666px)");
   const inputPostHandler = async () => {
     let rule = /^\s*$/;
     if (rule.exec(inputText)) {
@@ -36,24 +38,20 @@ export const InputPost = () => {
       username: user.username,
     };
     dispatch(createNewPost(post));
-
-    // dispatch(
-    //   addPost({
-    //     post: {
-    //       content: inputText,
-    //       author: user.name,
-    //       username: user.username,
-    //     },
-    //   })
-    // );
     setInputText("");
-    navigate("/");
+    navigate("/home");
   };
   useEffect(() => {
     dispatch(updateHeader({ title: "new post" }));
   }, []);
   return (
-    <section className={classes.root} style={{ paddingLeft: "18rem" }}>
+    <section
+      className={classes.root}
+      style={{
+        paddingLeft: mobileView ? "" : "19rem",
+        paddingRight: tabletView ? "" : "29rem",
+      }}
+    >
       <InputTextField inputText={inputText} setInputText={setInputText} />
       <Box justifyContent="flex-end" alignSelf="flex-end">
         <Button

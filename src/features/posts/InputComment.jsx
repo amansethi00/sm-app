@@ -13,6 +13,8 @@ import { InputTextField } from "./InputTextField";
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: "1rem",
+    borderBottom: "1px solid #383C3F",
+    borderTop: "1px solid #383C3F",
   },
 
   buttonlight: {

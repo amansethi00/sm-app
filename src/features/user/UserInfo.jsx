@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { UserFollowerAndFollowing } from "./UserFollowerAndFollowing";
 import { UserPosts } from "./UserPosts";
+import { FollowOrEditProfileButton } from "./FollowOrEditProfileButton";
 const useStyles = makeStyles((theme) => ({
   rootlight: {
     backgroundColor: "var(--primary)",
@@ -118,25 +119,10 @@ export const UserInfo = ({ user }) => {
               >{`@${user.username}`}</Typography>
             }
           />
-          <Box>
-            {user.username === currentUser.username ? (
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.button}
-              >
-                Edit Profile
-              </Button>
-            ) : (
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.button}
-              >
-                Follow
-              </Button>
-            )}
-          </Box>
+          <FollowOrEditProfileButton
+            currentUserName={currentUser.username}
+            username={user.username}
+          />
         </div>
         <CardContent className={classes["cardContent" + theme]}>
           <Typography

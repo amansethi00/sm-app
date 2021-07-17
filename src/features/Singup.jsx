@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,10 +12,11 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { updateHeader } from "./header/headerSlice";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -73,6 +74,7 @@ export function SignIn() {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
+  const dispatch = useDispatch();
   let regex = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
   let navigate = useNavigate();
   const signUpHandler = async (e) => {
@@ -101,6 +103,9 @@ export function SignIn() {
       toast.warn(error.response.message);
     }
   };
+  useEffect(() => {
+    // dispatch(updateHeader({ title: "" }));
+  }, []);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

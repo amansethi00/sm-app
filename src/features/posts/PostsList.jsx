@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     backgroundColor: "var(--primary)",
     borderBottom: "1px solid #383C3F",
+    borderRight: "1px solid #383C3F",
   },
   media: {
     height: 0,

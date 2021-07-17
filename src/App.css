@@ -4,3 +4,11 @@ html {
 .App {
   min-height: 100vh;
 }
+
+.MuiButton-root:hover {
+  background-color: #3c4ba2 !important;
+  color: white !important;
+}
+.active:hover {
+  color: white !important;
+}
