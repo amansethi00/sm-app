@@ -50,6 +50,20 @@ export const unfollowUser = createAsyncThunk(
     return response.data;
   }
 );
+export const updateBio = createAsyncThunk(
+  "user/updateBio",
+  async (usernameAndBio) => {
+    const { username, bio } = usernameAndBio;
+    const response = await axios.post(
+      `https://SocialMedia.amansethi00.repl.co/editProfile`,
+      {
+        bio,
+        username,
+      }
+    );
+    return response.data;
+  }
+);
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -78,6 +92,11 @@ export const userSlice = createSlice({
       };
     },
     [unfollowUser.fulfilled]: (state, action) => {
+      return {
+        ...action.payload.user,
+      };
+    },
+    [updateBio.fulfilled]: (state, action) => {
       return {
         ...action.payload.user,
       };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, CardHeader } from "@material-ui/core";
 import {
   Card,
@@ -129,7 +129,6 @@ export const UserInfo = ({ user }) => {
             className={classes["cardContent" + theme]}
             variant="body2"
             color="textSecondary"
-            component="p"
           >
             {user.bio}
           </Typography>

@@ -52,7 +52,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <PrivateRoute path="/search" element={<SearchPage />} />
           <PrivateRoute path="/home" element={<NewHomePage />} />
-          <PrivateRoute path="/" element={<Homepage />} />
+          <PrivateRoute path="/" element={<NewHomePage />} />
           <PrivateRoute path="/:username" element={<UserProfile />} />
           <PrivateRoute path="/posts/:postId" element={<SinglePost />} />
           <PrivateRoute path="/compose/post" element={<InputPost />} />

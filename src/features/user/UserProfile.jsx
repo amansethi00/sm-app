@@ -25,10 +25,10 @@ export const UserProfile = ({ viewUser }) => {
   };
   useEffect(() => {
     updateUser();
-  }, []);
+  }, [username]);
   useEffect(() => {
     dispatch(updateHeader({ title: username }));
-  }, []);
+  }, [username]);
   return (
     <div
       style={{

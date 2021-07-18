@@ -102,7 +102,7 @@ export const RightBar = () => {
             <SinglePostTitle
               post={{
                 username: "max",
-                author: "Doge bhai",
+                author: "Max M",
               }}
             />
             <FollowOrEditProfileButton

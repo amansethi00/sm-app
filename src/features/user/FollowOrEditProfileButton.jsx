@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Box, makeStyles } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { followUser, unfollowUser } from "./userSlice";
+import { EditProfileModal } from "./EditProfileModal";
 const useStyles = makeStyles({
   followButton: {
     borderRadius: "2rem",
@@ -26,6 +27,7 @@ export const FollowOrEditProfileButton = ({
   username,
   className,
 }) => {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const user = useSelector((state) => state.user);
   console.log({ user });
@@ -51,13 +53,17 @@ export const FollowOrEditProfileButton = ({
   return (
     <Box className={className}>
       {username === currentUserName ? (
-        <Button
-          variant="outlined"
-          color="primary"
-          className={classes.followButton}
-        >
-          Edit Profile
-        </Button>
+        <>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.followButton}
+            onClick={() => setOpen(true)}
+          >
+            Edit Profile
+          </Button>
+          <EditProfileModal bio={user.bio} open={open} setOpen={setOpen} />
+        </>
       ) : user.followingList.find(
           (followingusers) => followingusers === username
         ) ? (
