@@ -69,7 +69,7 @@ export const SinglePost = ({
       className={classes["root" + theme]}
     >
       <Card
-        backgroundColor={theme === "light" ? "white" : "black"}
+        // backgroundColor={theme === "light" ? "white" : "black"}
         className={classes["card" + theme]}
       >
         <SinglePostTitle post={post} />

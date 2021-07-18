@@ -84,8 +84,8 @@ export const LeftBar = () => {
     localStorage.removeItem("username");
     dispatch(logOutUser());
   };
-  const renderContent = obj.map((row) => (
-    <Button className={classes.button}>
+  const renderContent = obj.map((row, index) => (
+    <Button className={classes.button} key={index}>
       <NavLink
         style={{
           textDecoration: "none",

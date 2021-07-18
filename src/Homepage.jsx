@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { PostsList } from "./features/posts";
-import { Fab, makeStyles } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { updateHeader } from "./features/header/headerSlice";
 import { setPosts } from "./features/posts/postsSlice";
 import { FAB } from "./features/posts/FAB";
-import { fetchAllPosts } from "./services";
 import { fetchPosts } from "./features/posts/postsSlice";
 const useStyles = makeStyles({
   root: {
@@ -26,12 +24,6 @@ export const Homepage = () => {
   }, [postStatus, dispatch]);
   useEffect(() => {
     dispatch(updateHeader({ title: "Home" }));
-    // const loadPosts = async () => {
-    //   const posts = await fetchAllPosts();
-    //   console.log({ posts });
-    //   dispatch(setPosts({ posts }));
-    // };
-    // loadPosts();
   }, []);
   return (
     <section className={classes.root}>

@@ -8,6 +8,7 @@ const initialState = {
   following: 22,
   imageUrl: "asd",
   posts: [],
+  followingList: [],
 };
 export const getUserByUsername = createAsyncThunk(
   "user/getUser",
@@ -16,6 +17,36 @@ export const getUserByUsername = createAsyncThunk(
       `https://SocialMedia.amansethi00.repl.co/${username}`
     );
     console.log({ response });
+    return response.data;
+  }
+);
+export const followUser = createAsyncThunk(
+  "user/followuser",
+  async (currentUsernameAndUserToBeFollowed) => {
+    const { currentUsername, userToBeFollowed } =
+      currentUsernameAndUserToBeFollowed;
+    console.log({ userToBeFollowed });
+    const response = await axios.post(
+      `https://SocialMedia.amansethi00.repl.co/${currentUsername}/follow`,
+      {
+        userToBeFollowed,
+      }
+    );
+    console.log({ response });
+    return response.data;
+  }
+);
+export const unfollowUser = createAsyncThunk(
+  "user/unfollowuser",
+  async (currentUsernameAndUserToBeUnfollowed) => {
+    const { currentUsername, userToBeUnfollowed } =
+      currentUsernameAndUserToBeUnfollowed;
+    const response = await axios.post(
+      `https://SocialMedia.amansethi00.repl.co/${currentUsername}/unfollow`,
+      {
+        userToBeUnfollowed,
+      }
+    );
     return response.data;
   }
 );
@@ -37,6 +68,16 @@ export const userSlice = createSlice({
   extraReducers: {
     [getUserByUsername.fulfilled]: (state, action) => {
       console.log(action.payload);
+      return {
+        ...action.payload.user,
+      };
+    },
+    [followUser.fulfilled]: (state, action) => {
+      return {
+        ...action.payload.user,
+      };
+    },
+    [unfollowUser.fulfilled]: (state, action) => {
       return {
         ...action.payload.user,
       };

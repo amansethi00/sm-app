@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     position: "fixed",
     top: "5rem",
     right: "7rem",
-    width: "18rem",
+    width: "19rem",
     display: "flex",
     flexFlow: "column wrap",
     alignItems: "center",
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     position: "fixed",
     top: "5rem",
     right: "7rem",
-    width: "18rem",
+    width: "19rem",
     display: "flex",
     flexFlow: "column wrap",
     alignItems: "center",
@@ -107,7 +107,7 @@ export const RightBar = () => {
             />
             <FollowOrEditProfileButton
               className={classes.followButton}
-              username={"dogecoin"}
+              username={"max"}
             />
           </Card>
         </div>

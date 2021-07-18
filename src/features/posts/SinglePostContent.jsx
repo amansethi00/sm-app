@@ -30,7 +30,6 @@ export const SinglePostContent = ({ post }) => {
       <Typography
         style={{ color: typographyColors[theme].color }}
         variant="body2"
-        component="p"
       >
         {post.content}
       </Typography>

@@ -44,9 +44,9 @@ export const PostsList = ({ postsToRender }) => {
   console.log({ postsToRender });
   console.log("theme fomposts", theme);
 
-  const postsRender = posts.map((post) => {
+  const postsRender = posts.map((post, index) => {
     return (
-      <Card className={classes["root" + theme]}>
+      <Card className={classes["root" + theme]} key={index}>
         <SinglePostTitle post={post} />
         <Link
           to={`/posts/${post.id}`}
