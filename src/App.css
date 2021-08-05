@@ -12,3 +12,10 @@ html {
 .active:hover {
   color: white !important;
 }
+.active>button{
+  background-color: #3c4ba2 !important;
+  color: white !important;
+}
+#changecursor{
+  cursor: pointer;
+}

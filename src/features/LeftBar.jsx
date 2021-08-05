@@ -85,23 +85,25 @@ export const LeftBar = () => {
     dispatch(logOutUser());
   };
   const renderContent = obj.map((row, index) => (
-    <Button className={classes.button} key={index}>
-      <NavLink
-        style={{
-          textDecoration: "none",
-          color: theme === "light" ? "black" : "white",
-          display: "flex",
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        activeStyle={{ color: "#303F9E" }}
-        to={row.to}
-      >
+    <NavLink
+      style={{
+        textDecoration: "none",
+        color: theme === "light" ? "black" : "white",
+        display: "flex",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      activeStyle={{ color: "#303F9E !important" }}
+      to={row.to}
+    >
+      <Button className={classes.button} key={index}>
+
         {row.icon}
+
         <Typography variant="h6">{row.title}</Typography>
-      </NavLink>
-    </Button>
+      </Button>
+    </NavLink>
   ));
   return (
     <Card
@@ -125,8 +127,10 @@ export const LeftBar = () => {
         />
       </svg>
       <br />
-      {renderContent}
-      <Button className={classes.button} onClick={logOutHandler}>
+
+      <div style={{ display: "flex", alignItems: "center", flexFlow: "column wrap" }} >
+        {renderContent}
+
         <NavLink
           style={{
             textDecoration: "none",
@@ -139,10 +143,16 @@ export const LeftBar = () => {
           activeStyle={{ color: "#303F9E" }}
           to="/login"
         >
-          <ExitToAppOutlinedIcon fontSize="large" />
-          <Typography variant="h6">Log Out</Typography>
+          <Button style={{
+            color: theme === "light" ? "black" : "white",
+          }} className={classes.button} onClick={logOutHandler}>
+
+            <ExitToAppOutlinedIcon fontSize="large" />
+            <Typography variant="h6">Log Out</Typography>
+          </Button>
         </NavLink>
-      </Button>
-    </Card>
+      </div>
+
+    </Card >
   );
 };

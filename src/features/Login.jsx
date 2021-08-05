@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -72,14 +72,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const Login = () => {
   const classes = useStyles();
-  const [username, setUserName] = useState("");
+  const username = useRef(null);
+  const password = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loginWithGuestCred = () => {
+    username.current.value = "guest123";
+    password.current.value = "guestpassword";
+    toast.info("Logging as guest");
+    loginHandler();
+    // setTimeout(loginHandler, 1000);
+  }
   const loginHandler = async (e) => {
-    e.preventDefault();
+    e?.preventDefault();
+    console.log({ password }, { username: username.current.value })
     try {
       const response = await axios.get(
-        `https://SocialMedia.amansethi00.repl.co/login/${username}`
+        `https://SocialMedia.amansethi00.repl.co/login/${username.current.value}`, {
+        headers: {
+          'Authorization': password.current.value
+        }
+      }
       );
       console.log(response);
       if (response.data.success) {
@@ -122,7 +135,21 @@ export const Login = () => {
             label="username"
             name="username"
             autoFocus
-            onChange={(e) => setUserName(e.target.value)}
+            inputRef={username}
+          // ref={username}
+          // onChange={(e) => setUserName(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="password"
+            label="password"
+            name="password"
+            type="password"
+            inputRef={password}
+          // onChange={(e) => setPassword(e.target.value)}
           />
           {/* <TextField
             variant="outlined"
@@ -163,6 +190,9 @@ export const Login = () => {
               <Link href="/signup" variant="body2">
                 {"Don't have an account yet? Sign In"}
               </Link>
+              <Typography id="changecursor" variant="body2" color="primary" onClick={loginWithGuestCred} >
+                Login as guest user
+              </Typography>
             </Grid>
           </Grid>
         </form>

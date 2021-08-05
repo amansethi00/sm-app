@@ -17,6 +17,8 @@ import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { updateHeader } from "./header/headerSlice";
+import { updateUser } from "./user/userSlice";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -74,6 +76,7 @@ export function SignIn() {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   let regex = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
   let navigate = useNavigate();
@@ -88,12 +91,16 @@ export function SignIn() {
         {
           name,
           username,
+          password
         }
       );
       console.log(response);
       if (response.data.success) {
-        toast.success("user created succesfuly now login ");
-        navigate("/login");
+        toast.success("logged in succesfully");
+        const user = response.data.user;
+        dispatch(updateUser({ user }));
+        localStorage.setItem("username", user.username);
+        navigate("/home");
         setUserName("");
         setName("");
       } else {
@@ -141,6 +148,17 @@ export function SignIn() {
             label="name"
             name="name"
             onChange={(e) => setName(e.target.value)}
+          />
+          <TextField
+            type="password"
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="password"
+            label="password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
           {/* <TextField
             variant="outlined"

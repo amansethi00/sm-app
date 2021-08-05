@@ -57,31 +57,29 @@ export const SinglePostTitle = ({ post }) => {
           <Avatar
             aria-label="avatar"
             className={
-              classes[
-                "avatar" + avatarBackgroundColors[Math.floor(Math.random() * 3)]
-              ]
+              classes.avatarRed
             }
           >
             {post.username[0].toUpperCase()}
           </Avatar>
-        </Link>
+        </Link >
       }
       className={classes.title[theme]}
-      action={<IconButton aria-label="settings"></IconButton>}
+      action={< IconButton IconButton ariaLabel="settings" />}
       title={
-        <Link className={classes.linkStyle} to={`/${post.username}`}>
+        <Link Link Link className={classes.linkStyle} to={`/${post.username}`}>
           <Typography style={{ color: typographyColors[theme].color }}>
             {post.author}
           </Typography>
-        </Link>
+        </Link >
       }
       subheader={
-        <Typography
+        < Typography
           style={{ color: typographyColors[theme].color }}
           className={classes.subHeader[theme]}
         >
           @{post.username}
-        </Typography>
+        </ Typography>
       }
     />
   );

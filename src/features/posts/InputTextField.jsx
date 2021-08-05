@@ -51,9 +51,7 @@ export const InputTextField = ({ setInputText, inputText }) => {
         <Avatar
           aria-label="avatar"
           className={
-            classes[
-              "avatar" + avatarBackgroundColors[Math.floor(Math.random() * 3)]
-            ]
+            classes.avatarRed
           }
         >
           {user.username[0]}
