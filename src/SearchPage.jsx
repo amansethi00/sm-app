@@ -11,6 +11,7 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import { PostsList } from "./features/posts";
 import { setPosts } from "./features/posts/postsSlice";
+import { FAB } from "./features/posts/FAB";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,6 +96,7 @@ export const SearchPage = () => {
       </article>
 
       {postsToRender.length > 0 && <PostsList postsToRender={postsToRender} />}
+      <FAB />
     </section>
   );
 };

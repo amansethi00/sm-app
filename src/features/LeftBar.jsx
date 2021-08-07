@@ -39,9 +39,11 @@ const useStyles = makeStyles({
     color: "white",
   },
   button: {
-    width: "auto",
+    width: "10rem",
     borderRadius: "2rem",
     padding: "0.4rem 1rem",
+    display: 'flex',
+    alignItems: "center"
   },
   title: {
     fontWeight: "800",
@@ -97,9 +99,11 @@ export const LeftBar = () => {
       activeStyle={{ color: "#303F9E !important" }}
       to={row.to}
     >
-      <Button className={classes.button} key={index}>
+      <Button style={{
+        color: theme === "light" ? "black" : "white",
+      }} className={classes.button} key={index}>
 
-        {row.icon}
+        <div>{row.icon}</div>
 
         <Typography variant="h6">{row.title}</Typography>
       </Button>
@@ -128,7 +132,7 @@ export const LeftBar = () => {
       </svg>
       <br />
 
-      <div style={{ display: "flex", alignItems: "center", flexFlow: "column wrap" }} >
+      <div style={{ display: "flex", alignItems: "center", flexFlow: "column wrap", justifyContent: "space-around", height: "15rem" }} >
         {renderContent}
 
         <NavLink

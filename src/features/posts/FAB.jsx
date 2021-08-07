@@ -5,13 +5,15 @@ import AddIcon from "@material-ui/icons/Add";
 const useStyles = makeStyles({
   button: {
     position: "fixed",
-    bottom: "2rem",
+    bottom: "4rem",
     right: "2rem",
     zIndex: 1000,
   },
   buttonDesktop: {
     position: "fixed",
-    top: "18rem",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
+    top: "24rem",
     left: "4.5rem",
     zIndex: 1000000,
     backgroundColor: "#3C4BA2",

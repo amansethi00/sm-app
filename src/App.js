@@ -58,6 +58,7 @@ function App() {
           <PrivateRoute path="/compose/post" element={<InputPost />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <BottomNavbar />
         <ToastContainer
           position="bottom-right"
           autoClose={2000}

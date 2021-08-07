@@ -13,8 +13,14 @@ html {
   color: white !important;
 }
 .active>button{
-  background-color: #3c4ba2 !important;
-  color: white !important;
+  color: #3c4ba2 !important;
+  /* color: white !important; */
+}
+@media screen and (min-width:666px) {
+  .active>button{
+    background-color: #3c4ba2 !important;
+    color: white !important;
+  }
 }
 #changecursor{
   cursor: pointer;

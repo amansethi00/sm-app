@@ -42,7 +42,7 @@ export const EditProfileModal = ({ open, setOpen, bio }) => {
     };
     dispatch(updateBio(usernameAndBio));
     setOpen(false);
-    setTimeout(() => navigate(`/${user.username}`), 1000);
+    setTimeout(() => window.location.reload(), 1000);
   };
   return (
     <Modal
